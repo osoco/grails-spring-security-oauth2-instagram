@@ -8,7 +8,8 @@ appender('STDOUT', ConsoleAppender) {
     }
 }
 
-root(ERROR, ['STDOUT'])
+root(DEBUG, ['STDOUT'])
+logger("grails.plugin.springsecurity.oauth2", DEBUG, ['STDOUT'], false)
 
 def targetDir = BuildSettings.TARGET_DIR
 if (Environment.isDevelopmentMode() && targetDir) {

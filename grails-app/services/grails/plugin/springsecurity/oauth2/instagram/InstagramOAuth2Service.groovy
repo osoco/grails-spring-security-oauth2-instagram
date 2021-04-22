@@ -1,8 +1,8 @@
-package grails.plugin.springsecurity.oauth2.twitter
+package grails.plugin.springsecurity.oauth2.instagram
 
-import com.github.scribejava.apis.TwitterApi
+import com.github.scribejava.apis.InstagramApi
 import com.github.scribejava.core.builder.api.DefaultApi10a
-import com.github.scribejava.core.model.OAuth1AccessToken
+import com.github.scribejava.core.model.Token
 import grails.converters.JSON
 import grails.plugin.springsecurity.oauth2.exception.OAuth2Exception
 import grails.plugin.springsecurity.oauth2.service.OAuth2AbstractProviderService
@@ -10,38 +10,36 @@ import grails.plugin.springsecurity.oauth2.token.OAuth2SpringToken
 import grails.transaction.Transactional
 
 @Transactional
-class TwitterOAuth2Service extends OAuth2AbstractProviderService {
+class InstagramOAuth2Service extends OAuth2AbstractProviderService {
 
     @Override
     String getProviderID() {
-        return 'twitter'
+        return 'instagram'
     }
 
     @Override
     Class<? extends DefaultApi10a> getApiClass() {
-        TwitterApi.class
+        InstagramApi.class
     }
 
     @Override
     String getProfileScope() {
-        return 'https://api.twitter.com/1.1/account/verify_credentials.json'
+        return 'https://graph.instagram.com/me?fields=id,username'
     }
 
-    /*
 
     @Override
     String getScopes() {
-        return ''
+        return 'user_profile,user_media'
     }
 
     @Override
     String getScopeSeparator() {
-        return ' '
+        return ','
     }
-    */
 
     @Override
-    OAuth2SpringToken createSpringAuthToken(OAuth1AccessToken accessToken) {
+    OAuth2SpringToken createSpringAuthToken(Token accessToken) {
         def user
         def response = getResponse(accessToken)
         try {
@@ -51,11 +49,11 @@ class TwitterOAuth2Service extends OAuth2AbstractProviderService {
             log.error("Error parsing response from " + getProviderID() + ". Response:\n" + response.body)
             throw new OAuth2Exception("Error parsing response from " + getProviderID(), exception)
         }
-        if (!user?.email) {
-            log.error("No user email from " + getProviderID() + ". Response was:\n" + response.body)
-            throw new OAuth2Exception("No user id from " + getProviderID())
+        if (!user?.username) {
+            log.error("No user username from " + getProviderID() + ". Response was:\n" + response.body)
+            throw new OAuth2Exception("No user username from " + getProviderID())
         }
-        new TwitterOauth2SpringToken(accessToken, user?.email, providerID)
+        new InstagramOauth2SpringToken(accessToken, user.id, user.username, providerID)
     }
 
 }

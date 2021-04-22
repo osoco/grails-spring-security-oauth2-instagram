@@ -2,7 +2,7 @@
 grails:
     profile: web-plugin
     codegen:
-        defaultPackage: spring.security.oauth2.twitter
+        defaultPackage: spring.security.oauth2.instagram
     spring:
         transactionManagement:
             proxies: false

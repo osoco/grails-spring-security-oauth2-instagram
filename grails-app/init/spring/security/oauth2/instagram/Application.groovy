@@ -1,4 +1,4 @@
-package spring.security.oauth2.twitter
+package spring.security.oauth2.instagram
 
 import grails.boot.*
 import grails.boot.config.GrailsAutoConfiguration

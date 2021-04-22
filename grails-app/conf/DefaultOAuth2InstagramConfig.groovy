@@ -16,10 +16,10 @@
 security {
     oauth2 {
         providers {
-            twitter {
-                successUri = "/oauth2/twitter/success"
-                failureUri = "/oauth2/twitter/failure"
-                callback = "/oauth2/twitter/callback"
+            instagram {
+                successUri = "/oauth2/instagram/success"
+                failureUri = "/oauth2/instagram/failure"
+                callback = "/oauth2/instagram/callback"
                 api_key = "changeme_apikey"
                 api_secret = "changeme_apisecret"
             }
