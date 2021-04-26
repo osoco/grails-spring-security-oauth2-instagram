@@ -5,7 +5,6 @@ import grails.plugin.springsecurity.oauth2.token.OAuth2SpringToken
 
 class InstagramOauth2SpringToken extends OAuth2SpringToken{
 
-    private String socialId
     private String username
     private String providerId
 
@@ -22,7 +21,7 @@ class InstagramOauth2SpringToken extends OAuth2SpringToken{
 
     @Override
     String getSocialId() {
-        return socialId
+        return username
     }
 
     @Override
