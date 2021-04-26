@@ -53,7 +53,7 @@ class InstagramOAuth2Service extends OAuth2AbstractProviderService {
             log.error("No user username from " + getProviderID() + ". Response was:\n" + response.body)
             throw new OAuth2Exception("No user username from " + getProviderID())
         }
-        new InstagramOauth2SpringToken(accessToken, user.id, user.username, providerID)
+        new InstagramOauth2SpringToken(accessToken, user.username, providerID)
     }
 
 }

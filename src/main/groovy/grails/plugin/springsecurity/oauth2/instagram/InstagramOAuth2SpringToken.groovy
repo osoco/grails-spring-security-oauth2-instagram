@@ -9,9 +9,8 @@ class InstagramOauth2SpringToken extends OAuth2SpringToken{
     private String username
     private String providerId
 
-    InstagramOauth2SpringToken(OAuth2AccessToken accessToken, String socialId, String username, String providerId) {
+    InstagramOauth2SpringToken(OAuth2AccessToken accessToken, String username, String providerId) {
         super(accessToken)
-        this.socialId = socialId
         this.username = username
         this.providerId = providerId
     }
